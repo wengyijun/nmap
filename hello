@@ -1,0 +1,65 @@
+-6 (启用IPv6扫描)
+从2002年起，Nmap提供对IPv6的一些主要特征的支持。ping扫描(TCP-only)、
+连接扫描以及版本检测都支持IPv6。除增加-6选项外， 其它命令语法相同。当然
+，必须使用IPv6地址来替换主机名，如 3ffe:7501:4819:2000:210:f3ff:fe03:14d0。 除“所关注的端口”行的地址部分为IPv6地址。
+
+IPv6目前未在全球广泛采用，目前在一些国家(亚洲)应用较多， 一些高级操作系统支持
+IPv6。使用Nmap的IPv6功能，扫描的源和目 的都需要配置IPv6。如果ISP(大部分)不分配IPv6地址，
+Nmap可以采用 免费的隧道代理。一种较好的选择是BT Exact，位于https://tb.ipv6.btexact.com/。
+此外，还有Hurricane Electric，位于http://ipv6tb.he.net/。6to4隧道是 另一种常用的免费方法。
+
+-A (激烈扫描模式选项)
+这个选项启用额外的高级和高强度选项，目前还未确定代表 的内容。
+目前，这个选项启用了操作系统检测(-O) 和版本扫描(-sV)，以后会增加更多的功能。
+目的是启用一个全面的扫描选项集合，不需要用户记忆大量的 选项。这个选项仅仅启用功能，
+不包含用于可能所需要的 时间选项(如-T4)或细节选项(-v)。
+
+--datadir <directoryname> (说明用户Nmap数据文件位置)
+Nmap在运行时从文件中获得特殊的数据，这些文件有 nmap-service-probes，
+nmap-services， nmap-protocols， nmap-rpc， nmap-mac-prefixes和 nmap-os-fingerprints。
+Nmap首先 在--datadir选项说明的目录中查找这些文件。 未找到的文件，将在BMAPDIR环境变量说明的目录中查找
+。 接下来是用于真正和有效UID的~/.nmap 或Nmap可执行代码的位置(仅Win32)；然后是是编译位置，
+如/usr/local/share/nmap 或/usr/share/nmap。 Nmap查找的最后一个位置是当前目录。
+
+--send-eth (使用原以太网帧发送)
+要求Nmap在以太网(数据链路)层而不是IP(网络层)发送 报文。默认方式下，Nmap选择最适合其运行平台的方式，
+原套接 字(IP层)是UNIX主机最有效的方式，而以太网帧最适合Windows操作 系统，因为Microsoft禁用了原套接字支持。
+在UNIX中，如果没有其 它选择(如无以太网连接)，不管是否有该选项，Nmap都使用原IP包。
+
+--send-ip (在原IP层发送)
+要求Nmap通过原IP套接字发送报文，而不是低层的以 太网帧。这是--send-eth选项的补充。
+
+--privileged (假定用户具有全部权限)
+告诉Nmap假定其具有足够的权限进行源套接字包发送、 报文捕获和类似UNIX系统中根用户操作的权限。
+默认状态下， 如果由getuid()请求的类似操作不为0，Nmap将退出。 --privileged在具有Linux内核性能的类似 系统中使用非常有效
+，这些系统配置允许非特权用户可以进行 原报文扫描。需要明确的是，在其它选项之前使用这些需要权 限的选项(SYN扫描、操作系统检测等)
+。Nmap-PRIVILEGED变量 设置等价于--privileged选项。
+
+-V; --version (打印版本信息)
+打印Nmap版本号并退出。
+
+-h; --help (打印帮助摘要面)
+打印一个短的帮助屏幕，列出大部分常用的 命令选项，这个功能与不带参数运行Nmap是相同的。
+
+
+
+
+
+
+
+https://nmap.org/docs.html
+本节介绍由Nmap作者Fyodor撰写/与他人合着的书，或广泛涵盖Nmap。
+
+Nmap网络扫描是Nmap的官方指南。从为新手介绍端口扫描基础知识到详细介绍高级黑客使用的低级数据包制作方法，这本书由Nmap的原始作者撰写，适合所有级别的安全和网络专业人员。该参考指南 记录了每个Nmap功能和选项，其余部分演示了如何应用它们来快速解决实际任务。示例和图表显示了在线上的实际通信。主题包括颠覆防火墙和入侵检测系统，优化Nmap性能以及使用Nmap脚本引擎自动执行常见的联网任务。这本书的一半以上 可以免费在线获得。它是用英语写的，但是已被翻译成其他语言。
+
+费奥多（Fyodor）与FX，乔·格兰（Joe Grand），凯文·米特尼克（Kevin Mitnick），瑞安·罗素（Ryan Russell），杰伊·比尔（Jay Beale）等人合着了关于黑客的小说。他们的个人故事相结合，描述了大规模的电子金融抢劫案。虽然作品是虚构的，但使用Nmap，Hping2，OpenSSL等真实技术对黑客进行了深入描述。可以在亚马逊购买偷网络：如何拥有大陆（节省17美元），您可以在线阅读Fyodor的章节免费的。STC是畅销书，在亚马逊上排名第二，是畅销书。
+
+Syngress发布了续集：“ 窃取网络：如何拥有身份”。他们慷慨地允许Fyodor免费发布他最喜欢的章节。因此，请享用Nmap贡献者Brian Hatch的Bl @ ckTo \ / \ / 3r。它充满了幽默感和创造性的安全难题，以使专家满意，同时还提供有关SSH，SSL以及X Windows身份验证和加密的重点的安全课程。
+
+PaulinoCalderónPale已撰写了《Nmap 6：网络探索和安全审核食谱》（也可以直接从Packt Publishing获取）。
+
+Paulino还编写了Mastering Nmap脚本引擎（也可以直接从Packt Publishing获得）。
+
+詹姆斯·梅塞尔（James Messer）在Nmap上写了230页的电子书，《网络制图的秘密》。您可以购买 PDF 或免费查看受广告支持的HTML版本。
+
+Syngress 在 Angela Orebaugh和Becky Pinkard 的企业版中发布了Nmap：您的网络扫描指南。
